@@ -1,0 +1,22 @@
+﻿// If you follow the MVVM workflow this should be {DialogOwner}.axaml.cs
+// Visual Studio propably ask's you for project-related using directives, add them.
+
+public partial class {DialogOwner} : ReactiveWindow<{ViewModelSender}> // New: Replace "Window"
+{
+    public {DialogOwner}()
+    {
+        InitializeComponent();
+        // NEW: Copy this to your constructor
+        this.WhenActivated(d => d(ViewModel!.{CommandName}Interaction.RegisterHandler(DoShowDialogAsync)));
+    }
+
+    // NEW: Copy this to your class
+    private async Task DoShowDialogAsync(InteractionContext<{NameOfDialogsViewModel}, {ReturnType}> interaction)
+    {
+        var dialog = new {NameOfDialogsView}();
+        dialog.DataContext = interaction.Input;
+
+        var result = await dialog.ShowDialog<{ReturnType}>(this);
+        interaction.SetOutput(result);
+    }
+}

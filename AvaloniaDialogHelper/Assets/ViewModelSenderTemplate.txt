@@ -1,0 +1,28 @@
+﻿// If you follow the MVVM workflow this should be {ViewModelSender}.cs
+// Visual Studio propably ask's you for project-related using directives, add them.
+
+using System.Reactive.Linq; // NEW: Add this
+
+public class {ViewModelSender} : ViewModelBase
+{
+    public {ViewModelSender}()
+    {
+        // NEW: Add this Lines to your constructor
+        {CommandName}Interaction  = new Interaction<{NameOfDialogsViewModel}, {ReturnType}>();
+
+        {CommandName} = ReactiveCommand.CreateFromTask(async () =>
+        {
+            var store = new {NameOfDialogsViewModel}();
+
+            var result = await {CommandName}Interaction.Handle(store); 
+
+            // the result contains your return type => {ReturnType}
+
+        });
+    }
+
+    // NEW: Add this to your class
+    public ICommand {CommandName} { get; }
+
+    public Interaction<{NameOfDialogsViewModel}, {ReturnType}> {CommandName}Interaction { get; }
+}

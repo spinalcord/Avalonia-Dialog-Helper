@@ -1,0 +1,20 @@
+﻿// If you follow the MVVM workflow this should be {NameOfDialogsViewModel}.cs
+// Visual Studio propably ask's you for project-related using directives, add them.
+
+public partial class {NameOfDialogsViewModel} : ViewModelBase
+{
+    // NEW: Copy this to your constructor
+    public {NameOfDialogsViewModel}()
+    {
+        {CommandName} = ReactiveCommand.Create(() =>
+        {
+            // This is the return value, which MainViewModel uses after closing {NameOfDialogsView}.
+            return YOUR RETURN VALUE, WHICH IS TYPE OF {ReturnType};
+
+        });
+            
+    }
+
+    // NEW: Copy this to your class
+    public ReactiveCommand<Unit, {ReturnType}> {CommandName} { get; }
+}

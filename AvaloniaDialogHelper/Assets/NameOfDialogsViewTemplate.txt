@@ -1,0 +1,14 @@
+// If you follow the MVVM workflow this should be {NameOfDialogsView}.axaml.cs
+// Visual Studio propably ask's you for project-related using directives, add them.
+
+using System; // NEW: Add this
+
+public partial class {NameOfDialogsView} : ReactiveWindow<{NameOfDialogsViewModel}> // New: Replace "Window"
+{
+    public {NameOfDialogsView}()
+    {
+        InitializeComponent();
+        // NEW: Add this to the constructor
+        this.WhenActivated(d => d(ViewModel!.{CommandName}.Subscribe(Close))); 
+    }
+}

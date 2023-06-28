@@ -1,0 +1,63 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:AvaloniaDialogHelper.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="AvaloniaDialogHelper.Views.MainView"
+             x:DataType="vm:MainViewModel">
+  <Design.DataContext>
+    <!-- This only sets the DataContext for the previewer in an IDE,
+         to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+    <vm:MainViewModel />
+  </Design.DataContext>
+	<Grid Margin="20,20,20,20">
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="0.5*"/>
+			<ColumnDefinition/>
+		</Grid.ColumnDefinitions>
+
+		<StackPanel Grid.Column="0" Spacing="5">
+			<TextBlock Text="Who is the OWNER of the dialog?"></TextBlock>
+			<TextBox Text="{Binding DialogOwner}"></TextBox>
+			<TextBlock Text="From wich VIEWMODEL the dialog is executed?"></TextBlock>
+			<TextBox Text="{Binding ViewModelSender}"></TextBox>
+			<TextBlock Text="What is the NAME of the dialog's VIEW?"></TextBlock>
+			<TextBox Text="{Binding NameOfDialogsView}"></TextBox>
+			<TextBlock Text="What is the NAME of the dialog's VIEWMODEL?"></TextBlock>
+			<TextBox Text="{Binding NameOfDialogsViewModel}"></TextBox>
+			<TextBlock Text="What type of value should the dialog RETURN?"></TextBlock>
+			<TextBox Text="{Binding ReturnType}"></TextBox>
+			<TextBlock Text="What should be the COMMANDNAME?"></TextBlock>
+			<TextBox Text="{Binding CommandName}"></TextBox>
+			<Button Command="{Binding GenerateOutput}">Generate</Button>
+		</StackPanel>
+		<Grid  Grid.Column="1">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="40"></RowDefinition>
+				<RowDefinition></RowDefinition>
+			</Grid.RowDefinitions>
+			<TextBlock Grid.Row="0" FontSize="20" HorizontalAlignment="Center">Copy following to your source</TextBlock>
+			<TabControl Grid.Row="1">
+
+				<TabItem Header="{Binding DialogOwner, StringFormat={}{0}.axaml.cs}">
+						<TextBox Text="{Binding DialogOwnerTemplate, Mode=TwoWay}" AcceptsReturn="True" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"></TextBox>
+				</TabItem>
+				<TabItem Header="{Binding ViewModelSender, StringFormat={}{0}.cs}">
+					<TextBox Text="{Binding ViewModelSenderTemplate, Mode=TwoWay}" AcceptsReturn="True" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"></TextBox>
+				</TabItem>
+				<TabItem Header="{Binding NameOfDialogsView, StringFormat={}{0}.axaml.cs}">
+					<TextBox Text="{Binding NameOfDialogsViewTemplate, Mode=TwoWay}" AcceptsReturn="True" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"></TextBox>
+				</TabItem>
+				<TabItem Header="{Binding NameOfDialogsViewModel, StringFormat={}{0}.cs}">
+					<TextBox Text="{Binding NameOfDialogsViewModelTemplate, Mode=TwoWay}" AcceptsReturn="True" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"></TextBox>
+				</TabItem>
+
+			</TabControl>
+			
+		</Grid>
+
+		
+	</Grid>
+
+</UserControl>
